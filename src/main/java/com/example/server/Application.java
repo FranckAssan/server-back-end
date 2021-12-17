@@ -3,10 +3,19 @@ package com.example.server;
 import com.example.server.enumerations.Status;
 import com.example.server.models.Server;
 import com.example.server.repository.ServerRepository;
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import java.util.Arrays;
 
 @SpringBootApplication
 public class Application {
@@ -28,6 +37,17 @@ public class Application {
                     , "http://localhost:8080/server" + "/image/server2.png",
                     Status.SERVER_DOWN));
 
+        };
+    }
+
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry corsRegistry) {
+                corsRegistry.addMapping("/**")
+                        .allowedOrigins("http://localhost:4200");
+            }
         };
     }
 
