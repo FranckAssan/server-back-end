@@ -14,8 +14,11 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.sql.Time;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Map;
+import java.util.Timer;
 
 import static javax.security.auth.callback.ConfirmationCallback.OK;
 import static org.springframework.http.MediaType.IMAGE_PNG_VALUE;
@@ -32,7 +35,8 @@ public class ServerResource {
      * @return List of Servers
      */
     @GetMapping("/list")
-    public ResponseEntity<Response> getListServers() {
+    public ResponseEntity<Response> getListServers() throws InterruptedException {
+        Thread.sleep(2000); // Pause for 3 seconds for testing purpose
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
