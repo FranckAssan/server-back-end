@@ -36,7 +36,7 @@ public class ServerResource {
      */
     @GetMapping("/list")
     public ResponseEntity<Response> getListServers() throws InterruptedException {
-        Thread.sleep(2000); // Pause for 3 seconds for testing purpose
+        Thread.sleep(2000); // Pause for 2 seconds for testing purpose
         return ResponseEntity.ok(
                 Response.builder()
                         .timeStamp(LocalDateTime.now())
@@ -144,7 +144,7 @@ public class ServerResource {
             throws IOException {
 
         return Files.readAllBytes(Paths.get(System.getProperty("user.home") +
-                "/Desktop/server_img/" + fileName));
+                "/Desktop/ServerApp_Tutorial/server_img/" + fileName));
     }
 
 
